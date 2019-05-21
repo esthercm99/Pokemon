@@ -1,5 +1,12 @@
 package modelo.categoria;
 
-public class EstadoParalizado {
+import modelo.Pokemon;
+
+public class EstadoParalizado implements Categoria {
+
+	@Override
+	public void atacar(Pokemon oponente, Pokemon atacante) {
+		
+	}
 
 }

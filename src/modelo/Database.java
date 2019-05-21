@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,7 +24,7 @@ public enum Database {
 	Database() {
 		loadTipos();
 		loadEfectividades();
-		//loadAtaques();
+		loadAtaques();
 		//loadEspecies();
 	}
 	
@@ -34,27 +33,27 @@ public enum Database {
 		
 		// Tipos
 		System.out.println("Tipos");
-		for(int i = 0; i < d.tipos.size(); i++) {
+		for(int i = 1; i <= d.tipos.size(); i++) {
 			System.out.printf("%d %s%n", d.tipos.get(i).getIdTipo(), d.tipos.get(i).getNombreTipo());
 		}
 		
 		
 		System.out.println("\nEfectividades");
 		
-		for(int i = 0; i < d.efectividades.size(); i++) {
-			for(int j = 0; j < d.tipos.size(); j++) {
-				System.out.printf("%d %d %.1f%n", d.efectividades.get(d.tipos.get(i)).getAtaque().getIdTipo(), d.efectividades.get(d.tipos.get(j)).getPokemon().getIdTipo(), d.efectividades.get(d.tipos.get(j)).getMultiplicador());
+		for(int i = 1; i <= d.tipos.size(); i++) {
+			for(int j = 1; j <= d.tipos.size(); j++) {
+				System.out.printf("%d %d %.1f%n", i, j, d.efectividades.get(d.tipos.get(i)).get(d.tipos.get(j)));
 			}
 			System.out.println();
 		}
 		
-		/*
+		
 //		Ataques	
 		System.out.println("\nAtaques");
-		for(int i = 0; i< d.ataques.size(); i++) {
-			d.ataques.get(i).mostrarDatos();
-			System.out.println();
-		}*/
+		for(int i = 1; i <= d.ataques.size(); i++) {
+			d.ataques.get(i).showInformation();
+			System.out.println("\n");
+		}
 	}
 	
 	private List<String[]> leerFichero(String fichero){
@@ -84,93 +83,32 @@ public enum Database {
     }
     
     private void loadTipos() {
-    	List<String[]> lista;
-    	lista = leerFichero("Database/FicheroTipos.csv");   	
+    	List<String[]> lista = leerFichero("Database/FicheroTipos.csv");
+    	
     	for(int i = 0; i < lista.size(); i++) {
     		tipos.put(i+1, new Tipo(lista.get(i)));
     	}
     }    
     private void loadEfectividades() {
-    	List<String[]> lista;
-    	lista = leerFichero("Database/FicheroEfectividades.csv"); 
-    	
-    	// No borrar
-    	lista.stream()
-    		 .collect(Collectors.groupingBy(array -> tipos.get(Integer.parseInt(array[0])), 
-    				  	Collectors.toMap(array -> tipos.get(Integer.parseInt(array[1])), 
-    				  					 array -> Double.parseDouble(array[2])   )
-    				  			)  );
-    	
-    	
-    	
+    	List<String[]> lista = leerFichero("Database/FicheroEfectividades.csv"); 
+ 
+    	efectividades = lista.stream()
+    						 .collect(Collectors.groupingBy(array -> tipos.get(Integer.parseInt(array[0])), 
+    								  Collectors.toMap(array -> tipos.get(Integer.parseInt(array[1])), array -> Double.parseDouble(array[2]))));
 	}
-    
     private void loadAtaques() {
-    	Tipo tipo;
-    	List<String[]> listaMovimientos;
-    	
-    	listaMovimientos = leerFichero("Database/FicheroMovimientos.csv");
-    	
-    	for(int i = 0; i < listaMovimientos.size(); i++) {
-    		
-    		
-    		
-    		//efectividades.stream()
-    		//			   .filter(array -> array[5].equals());
-    		//ataques.put(Integer.parseInt(listaMovimientos.get(i)[0]), new Ataque(listaMovimientos.get(i), tipo, )));
+    	List<String[]> listaMovimientos = leerFichero("Database/FicheroMovimientos.csv");
+    	    	
+    	for(int i = 0; i < listaMovimientos.size(); i++) {    		
+    		ataques.put(i+1, 
+    					new Ataque(listaMovimientos.get(i), 														// Cadena con la información
+    							   tipos.get(Integer.parseInt(listaMovimientos.get(i)[5])), 						// Tipo
+    							   efectividades.get(tipos.get(Integer.parseInt(listaMovimientos.get(i)[5])))));	// Mapa de efectividades
     	}
-    	
-    	/*for(int i = 0; i < listaMovimientos.size(); i++) {
-    		
-    	}*/
-    	
-    	
-    	// ---- No válido ----
-    	
-    	
-    	/*System.out.println(efectividades.size() + " " + efectividades.get(0)[0].length()  + " " + efectividades.get(0)[1].length() + " " + efectividades.get(0)[2].length());
-    	for(int j = 0; j < efectividades.size(); j++) {
-    		System.out.println(efectividades.get(j)[0]  + " " + efectividades.get(j)[1] + " " + efectividades.get(j)[2]);
-    	}*/	
-    	
-//		Introducir Efectividades   	   	
-    	/*for(int i = 0; i < ataques.size(); i++) {					// i = Ataque
-    		for(int j = 0; j < efectividades.size(); j++) {			// j = Efectividad
-				for(int k = 0; k < tipos.size(); k++) {				// k = Tipo			
-					e1.put(tipos.get(k), efectividades.get(j).getMultiplicador());
-					ataques.get(i).setEfectividades(e1);					
-				}   
-    		}
-    	}*/
-    	
-    	// listaMovimientos.stream().forEach(string -> ataques.add(new Ataque(string)));
     }
  
     private void loadEspecies() {
-    	List<String[]> lista;
-    	lista = leerFichero("Database/FicheroEspecies.csv");
+    	List<String[]> lista = leerFichero("Database/FicheroEspecies.csv");
     	//lista.stream().forEach(string -> especies.put(Integer.parseInt(string[0]), new Especie(string)));    	
-    }
-    
-    
-   /* 
-    private Map<Integer, Tipo> obtenerTipo() {
-    	Map<Integer, Tipo> mapa = new HashMap <>();
-    	
-    	for (int i = 0; i < tipos.size(); i++) {
-    		mapa.put(tipos.get(i).getIdTipo(), tipos.get(i));
-    	}
-    	
-    	return mapa;
-    }
-    
-    private Map<Tipo, Map<Tipo, Double>> obtenerEfectividades() {
-    	Map<Integer, Tipo> mapa = new HashMap <>();
-    	
-    	for (int i = 0; i < efectividades.size(); i++) {
-    		mapa.put(efectividades.get(i).getAtaque(), e);
-    	}
-    	
-    	return mapa;
-    }*/
+    }   
 }

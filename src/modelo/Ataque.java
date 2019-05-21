@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import modelo.categoria.*;
 
 public class Ataque {
@@ -45,19 +46,19 @@ public class Ataque {
 		
 		switch(str) {
 			case "FISICO":
-				cat = (Categoria)fisico;
+				cat = fisico;
 				break;
 			case "ESPECIAL":
-				cat = (Categoria)especial;
+				cat = especial;
 				break;
 			case "ESTADODOR":
-				cat = (Categoria)estDormido;
+				cat = estDormido;
 				break;
 			case "ESTADOPAR":
-				cat = (Categoria)estParalizado;
+				cat = estParalizado;
 				break;
 			case "ESTADOENV":
-				cat = (Categoria)estEnvenedado;
+				cat = estEnvenedado;
 				break;
 		}
 		
@@ -65,6 +66,6 @@ public class Ataque {
 	}
 	
 	public void showInformation() {
-		System.out.printf("IdAtaque: %d%nNombre: %s%nPotencia: %d%nPrecisión: %d%nIdTipo: %d%nCategoría: %s", idAtaque, nombreAtaque, potencia, precision, tipo.getIdTipo(), categoria.getClass().getSimpleName());
+		System.out.printf("IdAtaque: %d%nNombre: %s%nPotencia: %d%nPrecisión: %d%nIdTipo: %d%nCategoría: %s%n", idAtaque, nombreAtaque, potencia, precision, tipo.getIdTipo(), categoria.getClass().getSimpleName());
 	}
 }
