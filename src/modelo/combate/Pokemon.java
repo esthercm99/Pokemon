@@ -1,6 +1,7 @@
-package modelo;
+package modelo.combate;
 
 import modelo.estado.Estado;
+import modelo.pokemon.Especie;
 
 public class Pokemon {
 	private Especie especie;

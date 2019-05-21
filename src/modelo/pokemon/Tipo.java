@@ -1,4 +1,4 @@
-package modelo;
+package modelo.pokemon;
 
 public class Tipo {
 	private int idTipo;

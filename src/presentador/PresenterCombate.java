@@ -1,5 +1,5 @@
 package presentador;
-import modelo.Pokemon;
+import modelo.combate.Pokemon;
 
 public interface PresenterCombate {
 	public void showPokemon(Pokemon pokemon);

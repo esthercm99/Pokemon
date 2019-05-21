@@ -1,6 +1,6 @@
 package modelo.categoria;
 
-import modelo.Pokemon;
+import modelo.combate.Pokemon;
 
 public class EstadoEnvenenado implements Categoria {
 

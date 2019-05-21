@@ -1,4 +1,4 @@
-package modelo;
+package modelo.pokemon;
 
 import java.util.HashMap;
 import java.util.Map;

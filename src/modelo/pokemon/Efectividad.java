@@ -1,4 +1,4 @@
-package modelo;
+package modelo.pokemon;
 
 public class Efectividad {
 	private Tipo ataque;

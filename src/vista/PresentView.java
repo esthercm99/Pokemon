@@ -1,6 +1,6 @@
 package vista;
 
-import modelo.Pokemon;
+import modelo.combate.Pokemon;
 
 public interface PresentView {
 	String requestName();

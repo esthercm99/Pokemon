@@ -1,4 +1,4 @@
-package modelo;
+package modelo.factoria;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +11,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import modelo.pokemon.Ataque;
+import modelo.pokemon.Especie;
+import modelo.pokemon.Tipo;
 
 public enum Database {
 	
@@ -25,7 +29,7 @@ public enum Database {
 		loadTipos();
 		loadEfectividades();
 		loadAtaques();
-		//loadEspecies();
+		loadEspecies();
 	}
 	
 	public static void main(String[] args) {
@@ -54,6 +58,14 @@ public enum Database {
 			d.ataques.get(i).showInformation();
 			System.out.println("\n");
 		}
+		
+//		Especies
+		System.out.println("\nAtaques");
+		for(int i = 1; i <= d.especies.size(); i++) {
+			d.especies.get(i).showInformation();
+			System.out.println("\n");
+		}
+		
 	}
 	
 	private List<String[]> leerFichero(String fichero){
@@ -108,7 +120,29 @@ public enum Database {
     }
  
     private void loadEspecies() {
+    	Tipo tipo, subtipo;
+    	Map<Integer, Ataque> ataquesPokemon = new HashMap<>();
     	List<String[]> lista = leerFichero("Database/FicheroEspecies.csv");
-    	//lista.stream().forEach(string -> especies.put(Integer.parseInt(string[0]), new Especie(string)));    	
+    	
+    	
+    	for(int i = 0; i < lista.size(); i++) {
+    		
+    		ataquesPokemon.clear();
+    		
+    		for(int j = 1; j <= 4; j++) {
+    			ataquesPokemon.put(j, ataques.get(Integer.parseInt(lista.get(i)[9+j])));    			
+    		}
+    		
+    		tipo = tipos.get(Integer.parseInt(lista.get(i)[8]));
+    		subtipo = tipos.get(lista.get(i)[9].equals("")?null:tipos.get(Integer.parseInt(lista.get(i)[9])));
+    		
+    		if(subtipo == null) {
+    			especies.put(i+1, new Especie(lista.get(i), tipo, ataquesPokemon));
+    		} else {
+    			especies.put(i+1, new Especie(lista.get(i), tipo, subtipo, ataquesPokemon));
+    		}
+    		
+    	}    	
+    	//lista.stream().forEach(string -> especies.put(Integer.parseInt(string[0]), new Especie(string, , , )));    	
     }   
 }

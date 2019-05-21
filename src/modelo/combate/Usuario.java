@@ -1,4 +1,4 @@
-package modelo;
+package modelo.combate;
 
 import presentador.Presenter;
 import presentador.PresenterUsuario;
