@@ -15,4 +15,8 @@ public class Tipo {
 	public String getNombreTipo() {
 		return nombreTipo;
 	}
+	
+	public String toString() {
+		return String.format("%d", idTipo);
+	}
 }
