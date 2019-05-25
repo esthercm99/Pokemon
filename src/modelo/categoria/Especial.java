@@ -1,12 +1,39 @@
 package modelo.categoria;
 
-import modelo.combate.Pokemon;
+import java.util.Random;
+
+import modelo.factoria.Pokemon;
+import modelo.pokemon.Ataque;
 
 public class Especial implements Categoria {
 
 	@Override
-	public void atacar(Pokemon oponente, Pokemon atacante) {
-		
+	public String atacar(Pokemon oponente, Pokemon atacante) {
+		double damage = damage(atacante, oponente);
+		oponente.setVida(oponente.getVida() - damage);
+		return String.format("%s ha hecho %.2f de daño con un ataque especial a %s.", atacante.getEspecie().getNombreEspecie(), damage, oponente.getEspecie().getNombreEspecie());
 	}
+	
+	public double damage(Pokemon atacante, Pokemon oponente) {
+		Random rnd = new Random();
+		Ataque ataque = atacante.getActualAtaque();
+		double b, e, total;
+		int n = oponente.getNivel(), a,	p = ataque.getPotencia(), d, v = rnd.nextInt(15)+85+1;
 
+		a = atacante.getEspecie().getAtaqueEspecial();
+		d = oponente.getEspecie().getDefensaEspecial();
+
+		// Si el ataque es del mismo tipo que el pokemon que lo lanza
+		if(ataque.getTipo().getIdTipo() == atacante.getEspecie().getTipo().getIdTipo() || ataque.getTipo().getIdTipo() == atacante.getEspecie().getSubTipo().getIdTipo()) {
+			b = 1.5;
+		} else {
+			b = 1;
+		}
+		
+		e = ataque.getEfectividades().get(oponente.getEspecie().getTipo());
+		
+		total = 0.01 * b * e * v * ( ( ((0.2*n +1)*a*p) / (25 * d) ) + 2);
+		
+		return total;
+	}
 }

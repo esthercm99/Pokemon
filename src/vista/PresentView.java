@@ -1,11 +1,10 @@
 package vista;
 
-import modelo.combate.Pokemon;
-
 public interface PresentView {
 	String requestName();
 	int requestOption();
-	int requestAttack();
-	int requestPokemon();
-	void showPokemon(Pokemon pokemon);
+	int requestAttack(String attacks);
+	int requestPokemon(String listaPokemons, int numPokemons);
+	void showFight(String string);
+	void mensajeError(String mensaje);
 }

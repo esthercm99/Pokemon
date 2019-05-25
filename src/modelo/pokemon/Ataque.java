@@ -37,8 +37,20 @@ public class Ataque {
 	public int getIdAtaque() {
 		return idAtaque;
 	}
+	public int getPotencia() {
+		return potencia;
+	}
+	public int getPrecision() {
+		return precision;
+	}
+	public String getNombreAtaque() {
+		return nombreAtaque;
+	}
 	public Tipo getTipo() {
 		return tipo;
+	}
+	public Categoria getCategoria() {
+		return categoria;
 	}
 	
 	private Categoria stringToCategoria(String str) {
@@ -63,9 +75,5 @@ public class Ataque {
 		}
 		
 		return cat;
-	}
-	
-	public void showInformation() {
-		System.out.printf("IdAtaque: %d%nNombre: %s%nPotencia: %d%nPrecisión: %d%nIdTipo: %d%nCategoría: %s%n", idAtaque, nombreAtaque, potencia, precision, tipo.getIdTipo(), categoria.getClass().getSimpleName());
 	}
 }

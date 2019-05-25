@@ -1,6 +1,5 @@
 package modelo.pokemon;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Especie {	
@@ -15,7 +14,7 @@ public class Especie {
 	
 	private Tipo tipo;
 	private Tipo subtipo;
-	private Map<Integer, Ataque> ataques = new HashMap<>();
+	private Map<Integer, Ataque> ataques ;
 		
 	// Con subtipo:
 	public Especie(String[] string, Tipo tipo, Tipo subtipo, Map<Integer, Ataque> ataques) {
@@ -81,9 +80,5 @@ public class Especie {
 	}
 	public Map<Integer, Ataque> getAtaques() {
 		return ataques;
-	}
-	 
-	public void showInformation() {
-		System.out.printf("IdEspecie: %d%nEspecie: %s%nVida: %d%nVelocidad: %d%nAtaque: %d%nDefensa: %d%nAtaque Especial: %d%nDefensa Especial: %d%nTipo: %d%nSubTipo: %d%n", idEspecie, nombreEspecie, vida, velocidad, ataque, defensa, ataqueEsp, defensaEsp, tipo.getIdTipo(), subtipo.getIdTipo());
 	}
 }

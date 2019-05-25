@@ -1,7 +1,7 @@
 package modelo.categoria;
 
-import modelo.combate.Pokemon;
+import modelo.factoria.Pokemon;
 
 public interface Categoria {
-	public void atacar(Pokemon oponente, Pokemon atacante);
+	public String atacar(Pokemon oponente, Pokemon atacante);
 }

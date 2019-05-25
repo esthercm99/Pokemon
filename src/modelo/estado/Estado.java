@@ -1,9 +1,7 @@
 package modelo.estado;
 
-import modelo.pokemon.Especie;
+import modelo.factoria.Pokemon;
 
 public interface Estado {
-	void dormido(Especie pokemon);
-	void paralizado(Especie pokemon);
-	void envenenado(Especie pokemon);
+	public String atacar(Pokemon atacante, Pokemon oponente);
 }

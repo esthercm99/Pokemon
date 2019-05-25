@@ -4,5 +4,5 @@ public interface PresenterUsuario {
 	public void requestName();
 	public int requestOption();
 	public int requestAttack();
-	public int requestPokemon();
+	public int requestPokemon(String lista, int numPokemons);
 }

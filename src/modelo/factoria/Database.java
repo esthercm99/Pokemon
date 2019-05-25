@@ -32,41 +32,6 @@ public enum Database {
 		loadEspecies();
 	}
 	
-	public static void main(String[] args) {
-		Database d = Database.INSTANCE;
-		
-		// Tipos
-		System.out.println("Tipos");
-		for(int i = 1; i <= d.tipos.size(); i++) {
-			System.out.printf("%d %s%n", d.tipos.get(i).getIdTipo(), d.tipos.get(i).getNombreTipo());
-		}
-		
-		
-		System.out.println("\nEfectividades");
-		
-		for(int i = 1; i <= d.tipos.size(); i++) {
-			for(int j = 1; j <= d.tipos.size(); j++) {
-				System.out.printf("%d %d %.1f%n", i, j, d.efectividades.get(d.tipos.get(i)).get(d.tipos.get(j)));
-			}
-			System.out.println();
-		}
-		
-		
-//		Ataques	
-		System.out.println("\nAtaques");
-		for(int i = 1; i <= d.ataques.size(); i++) {
-			d.ataques.get(i).showInformation();
-			System.out.println("\n");
-		}
-		
-//		Especies
-		System.out.println("\nAtaques");
-		for(int i = 1; i <= d.especies.size(); i++) {
-			d.especies.get(i).showInformation();
-			System.out.println("\n");
-		}
-		
-	}
 	
 	private List<String[]> leerFichero(String fichero){
         Stream<String> linea;
@@ -118,7 +83,6 @@ public enum Database {
     							   efectividades.get(tipos.get(Integer.parseInt(listaMovimientos.get(i)[5])))));	// Mapa de efectividades
     	}
     }
- 
     private void loadEspecies() {
     	Tipo tipo, subtipo;
     	Map<Integer, Ataque> ataquesPokemon = new HashMap<>();
@@ -127,11 +91,12 @@ public enum Database {
     	
     	for(int i = 0; i < lista.size(); i++) {
     		
-    		ataquesPokemon.clear();
+    		ataquesPokemon = new HashMap<>();		// New y no .clear() ya que se sobreescribían los ataque tras crear la especie.
     		
-    		for(int j = 1; j <= 4; j++) {
-    			ataquesPokemon.put(j, ataques.get(Integer.parseInt(lista.get(i)[9+j])));    			
-    		}
+    		ataquesPokemon.put(1, ataques.get(Integer.parseInt(lista.get(i)[10])));    			
+    		ataquesPokemon.put(2, ataques.get(Integer.parseInt(lista.get(i)[11])));
+    		ataquesPokemon.put(3, ataques.get(Integer.parseInt(lista.get(i)[12])));
+    		ataquesPokemon.put(4, ataques.get(Integer.parseInt(lista.get(i)[13])));
     		
     		tipo = tipos.get(Integer.parseInt(lista.get(i)[8]));
     		subtipo = tipos.get(lista.get(i)[9].equals("")?null:tipos.get(Integer.parseInt(lista.get(i)[9])));
@@ -141,8 +106,16 @@ public enum Database {
     		} else {
     			especies.put(i+1, new Especie(lista.get(i), tipo, subtipo, ataquesPokemon));
     		}
-    		
-    	}    	
-    	//lista.stream().forEach(string -> especies.put(Integer.parseInt(string[0]), new Especie(string, , , )));    	
+    	}    	   	
     }   
+
+    public Map<Integer, Tipo> getListaTipo() {
+    	return tipos;
+    }
+    public Map<Integer, Ataque> getListaAtaque() {
+    	return ataques;
+    }
+    public Map<Integer, Especie> getListaEspecies() {
+    	return especies;
+    }
 }
