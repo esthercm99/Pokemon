@@ -10,12 +10,7 @@ public class Combate implements PresenterCombate {
 	
 	private Entrenador entrenador1 = new Usuario();
 	private Entrenador entrenador2 = new Maquina();
-	
-	public static void main(String[] args) {
-		Combate c1 = new Combate();
-		c1.partida();
-	}
-	
+		
 	public void partida() {
 		boolean isJ1Surrender = false, isJ2Surrender = false, exit = false;
 		crearEntrenadores();

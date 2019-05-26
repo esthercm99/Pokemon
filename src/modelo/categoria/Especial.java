@@ -14,7 +14,7 @@ public class Especial implements Categoria {
 		return String.format("%s ha hecho %.2f de daño con un ataque especial a %s.", atacante.getEspecie().getNombreEspecie(), damage, oponente.getEspecie().getNombreEspecie());
 	}
 	
-	public double damage(Pokemon atacante, Pokemon oponente) {
+	private double damage(Pokemon atacante, Pokemon oponente) {
 		Random rnd = new Random();
 		Ataque ataque = atacante.getActualAtaque();
 		double b, e, total;

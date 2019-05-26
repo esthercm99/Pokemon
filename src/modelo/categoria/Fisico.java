@@ -15,7 +15,7 @@ public class Fisico implements Categoria {
 	}
 	
 
-	public double damage(Pokemon atacante, Pokemon oponente) {
+	private double damage(Pokemon atacante, Pokemon oponente) {
 		Random rnd = new Random();
 		Ataque ataque = atacante.getActualAtaque();
 		double b, e, total;
