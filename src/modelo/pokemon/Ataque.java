@@ -53,7 +53,8 @@ public class Ataque {
 		return categoria;
 	}
 	
-	private Categoria stringToCategoria(String str) {
+	// Es Private pero al hacer el test es necesario cambiarlo a Public
+	public Categoria stringToCategoria(String str) {
 		Categoria cat = null;
 		
 		switch(str) {

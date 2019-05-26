@@ -82,7 +82,7 @@ public class Combate implements PresenterCombate {
 	}
 	
 	// Devolver boleean si el entrenador se rinde.
-	private boolean combate(Entrenador atacante, Entrenador oponente) {
+	public boolean combate(Entrenador atacante, Entrenador oponente) {
 		boolean isSurrender = false;
 		int option;
 		

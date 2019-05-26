@@ -5,7 +5,7 @@ import java.util.List;
 import modelo.factoria.*;
 
 public abstract class Entrenador {
-	private String nombreEntrenador;
+	private String nombreEntrenador = "Sin nombre";
 	private Pokemon actualPokemon;
 	private List<Pokemon> listaPokemon = new ArrayList<>();
 	
