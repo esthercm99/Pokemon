@@ -12,7 +12,7 @@ public class EstadoParalizado implements Categoria {
 			oponente.setVelocidad(oponente.getVelocidad()*0.5);
 			resultado = String.format("%s se quedó %s.", oponente.getEspecie().getNombreEspecie(), oponente.getEstado().getClass().getSimpleName().toLowerCase());
 		} else {
-			resultado = String.format("El ataque no le hizo efecto, el pokémon rival está %s", oponente.getEstado().getClass().getSimpleName().toLowerCase());
+			resultado = String.format("El ataque no le hizo efecto, el pokémon rival está %s.", oponente.getEstado().getClass().getSimpleName().toLowerCase());
 		}
 		return resultado;
 	}
