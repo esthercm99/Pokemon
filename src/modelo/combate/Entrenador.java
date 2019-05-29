@@ -22,10 +22,22 @@ public abstract class Entrenador {
 	}	
 	
 	private void asignarPokemons() {
+		boolean exit = false;
 		final int NUMPOKEMONS = 3;
+		Pokemon pokemon;
 		PokemonFactory factoria = new FactoryAleatorio();
+		
 		for(int i = 0; i < NUMPOKEMONS; i++) {
-			listaPokemon.add(factoria.crearPokemonAleatorio());
+			do {
+				exit = false;
+				pokemon = factoria.crearPokemonAleatorio();
+				if(listaPokemon.size() == 0) {
+					exit = true;
+				} else if(pokemon.getEspecie().getIdEspecie() != listaPokemon.get(i-1).getEspecie().getIdEspecie()) {
+					exit = true;
+				}
+			} while(!exit);
+			listaPokemon.add(pokemon);
 		}
 	}
 	
